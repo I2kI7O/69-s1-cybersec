@@ -1,10 +1,13 @@
 # Cyber Security
 
 ## My Information
+
 - Wachirawit Kantho
 - 012-6
-- ความคาดหวังของวิชานี้:
-ต้องการเรียนรู้พื้นฐานด้าน Cybersecurity ให้เข้าใจมากขึ้น
-ต้องการฝึกการใช้งาน Git และ GitHub ในการจัดการงาน
-ต้องการเรียนรู้การวิเคราะห์ช่องโหว่และการป้องกันภัยคุกคามทางไซเบอร์
-ต้องการนำความรู้ไปประยุกต์ใช้ในการทำงานจริงในอนาคต
+
+## ## Course Expectations
+
+- Learn and understand the fundamentals of Cybersecurity more clearly.
+- Practice using Git and GitHub for project and task management.
+- Learn vulnerability analysis and cybersecurity threat prevention techniques.
+- Apply the knowledge gained in real-world situations and future careers.
