@@ -5,7 +5,7 @@
 - Wachirawit Kantho
 - 012-6
 
-## ## Course Expectations
+## Course Expectations
 
 - Learn and understand the fundamentals of Cybersecurity more clearly.
 - Practice using Git and GitHub for project and task management.
