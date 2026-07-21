@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: 69-s1-db
+    ports:
+      - "54327:5432"
+    environment:
+      POSTGRES_USER: wachi
+      POSTGRES_PASSWORD: Wach1@3079
+      POSTGRES_DB: wachi
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  admin:
+    image: dpage/pgadmin4
+    container_name: 69-s1-admin
+    ports:
+      - "8081:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: wachi@admin.com
+      PGADMIN_DEFAULT_PASSWORD: Wach1@3079
+    depends_on:
+      - db
