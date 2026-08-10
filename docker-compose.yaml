@@ -11,15 +11,30 @@ services:
     volumes:
       - ./data:/var/lib/postgresql/data
 
-  pgadmin:
-    image: dpage/pgadmin4
+  admin:
+    image: dpage/pgadmin4:latest
     container_name: 69-s1-admin
-    environment:	
-      PGADMIN_DEFAULT_EMAIL: wachi@rmutp.ac.th
-      PGADMIN_DEFAULT_PASSWORD: Wach1@3079
     ports:
       - "8081:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: wachi@rmutp.ac.th
+      PGADMIN_DEFAULT_PASSWORD: Wach1@3079
     volumes:
-      - ./pgadmin:/var/lib/pgadmin
+      - ./admin_data:/var/lib/pgadmin
+    depends_on:
+      - db
+
+  app:
+    image: prawee/strapi
+    container_name: 69-s1-app
+    ports:
+      - "9092:1337"
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: wachi
+      DATABASE_USERNAME: wachi
+      DATABASE_PASSWORD: Wach1@3079
     depends_on:
       - db
