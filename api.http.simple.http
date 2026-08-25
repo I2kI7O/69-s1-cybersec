@@ -22,7 +22,6 @@ Content-Type: application/json
 ###
 
 ## Profile (ดูข้อมูลส่วนตัว)
-# อย่าลืมเอา Token ที่ได้จากตอนยิง Login หรือ Register มาแปะแทนข้อความข้างล่างนี้นะครับ
 GET http://localhost:9091/api/users/me
 Authorization: Bearer <ใส่_TOKEN_ที่ได้จากตอน_LOGIN_หรือ_REGISTER>
 
