@@ -1,1 +1,7 @@
+.env
+api.http
+env.simple
 data/
+admin_data/
+pgadmin/
+69-s1-cybersec/

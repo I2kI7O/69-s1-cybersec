@@ -1,0 +1,39 @@
+# API
+
+## Login
+POST http://localhost:9091/api/auth/local
+Content-Type: application/json
+
+{
+    "identifier": "user@example.com",
+    "password": "Password123"
+}
+
+###
+
+## Forgot (ลืมรหัสผ่าน)
+POST http://localhost:9091/api/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email": "user@example.com"
+}
+
+###
+
+## Profile (ดูข้อมูลส่วนตัว)
+# อย่าลืมเอา Token ที่ได้จากตอนยิง Login หรือ Register มาแปะแทนข้อความข้างล่างนี้นะครับ
+GET http://localhost:9091/api/users/me
+Authorization: Bearer <ใส่_TOKEN_ที่ได้จากตอน_LOGIN_หรือ_REGISTER>
+
+###
+
+## Register / Signup (สมัครสมาชิก)
+POST http://localhost:9091/api/auth/local/register
+Content-Type: application/json
+
+{
+    "username": "wachi",
+    "email": "user@example.com",
+    "password": "Password123"
+}
