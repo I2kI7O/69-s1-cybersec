@@ -5,8 +5,8 @@ POST http://localhost:9091/api/auth/local
 Content-Type: application/json
 
 {
-    "identifier": "user@example.com",
-    "password": "Password123"
+    "identifier": "admin@example.com",
+    "password": "change_me"
 }
 
 ###
@@ -16,7 +16,7 @@ POST http://localhost:9091/api/auth/forgot-password
 Content-Type: application/json
 
 {
-    "email": "user@example.com"
+    "email": "admin@example.com"
 }
 
 ###
@@ -33,6 +33,6 @@ Content-Type: application/json
 
 {
     "username": "wachi",
-    "email": "user@example.com",
-    "password": "Password123"
+    "email": "admin@example.com",
+    "password": "change_me"
 }
