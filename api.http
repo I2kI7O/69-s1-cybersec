@@ -1,0 +1,88 @@
+### =========================================================================
+### 1. ADMIN OPERATIONS (ระบบผู้ดูแลระบบ Strapi Admin)
+### =========================================================================
+
+### Admin - Login (เข้าสู่ระบบแอดมิน)
+# @name adminLogin
+POST http://localhost:9091/admin/login
+Content-Type: application/json
+
+{
+    "email": "wachi3079@gmail.com",
+    "password": "Wach1@3079"
+}
+
+###
+
+### Admin - Register (ลงทะเบียนแอดมิน)
+POST http://localhost:9091/admin/register
+Content-Type: application/json
+
+{
+    "email": "wachi3079@gmail.com",
+    "password": "Wach1@3079",
+    "firstname": "Wachi",
+    "lastname": "Admin"
+}
+
+###
+
+### Admin - Forgot Password (ลืมรหัสผ่านแอดมิน)
+### หมายเหตุ: Endpoint นี้ตอบ 204 No Content เสมอเพื่อความปลอดภัย
+POST http://localhost:9091/admin/forgot-password
+Content-Type: application/json
+
+{
+    "email": "wachi3079@gmail.com"
+}
+
+###
+
+### Admin - Profile (ดูข้อมูลส่วนตัวแอดมิน)
+### ดึง JWT Token จากผลลัพธ์ของ Admin Login ด้านบนโดยอัตโนมัติ
+GET http://localhost:9091/admin/users/me
+Authorization: Bearer {{adminLogin.response.body.data.token}}
+
+
+### =========================================================================
+### 2. USER OPERATIONS (ระบบสมาชิกทั่วไป Users-Permissions Plugin)
+### =========================================================================
+
+### User - Login (เข้าสู่ระบบสมาชิก)
+# @name userLogin
+POST http://localhost:9091/api/auth/local
+Content-Type: application/json
+
+{
+    "identifier": "wachi3079@gmail.com",
+    "password": "Wach1@3079"
+}
+
+###
+
+### User - Register (สมัครสมาชิกทั่วไป)
+POST http://localhost:9091/api/auth/local/register
+Content-Type: application/json
+
+{
+    "username": "wachi_user_01",
+    "email": "wachi_user_01@gmail.com",
+    "password": "Wach1@3079"
+}
+
+###
+
+### User - Forgot Password (ลืมรหัสผ่านสมาชิก)
+POST http://localhost:9091/api/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email": "wachi3079@gmail.com"
+}
+
+###
+
+### User - Profile (ดูข้อมูลส่วนตัวสมาชิก)
+### ดึง JWT Token จากผลลัพธ์ของ User Login ด้านบนโดยอัตโนมัติ
+GET http://localhost:9091/api/users/me
+Authorization: Bearer {{userLogin.response.body.jwt}}
