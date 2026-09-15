@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
       POSTGRES_DB: ${POSTGRES_DB:-wachi}
     volumes:
-      - ./data/data:/var/lib/postgresql/data
+      - ./data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-wachi} -d ${POSTGRES_DB:-wachi}"]
       interval: 5s
@@ -25,7 +25,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@example.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-change_me}
     volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin 
     depends_on:
       - db
 
@@ -47,8 +47,6 @@ services:
       APP_KEYS: ${APP_KEYS:-key1,key2,key3,key4}
       API_TOKEN_SALT: ${API_TOKEN_SALT:-myApiTokenSalt12345}
       TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT:-myTransferTokenSalt12345}
-    volumes:
-      - ./config/plugins.js:/opt/app/config/plugins.js
     depends_on:
       db:
         condition: service_healthy
