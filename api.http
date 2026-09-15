@@ -8,8 +8,8 @@ POST http://localhost:9091/admin/login
 Content-Type: application/json
 
 {
-    "email": "wachi3079@gmail.com",
-    "password": "Wach1@3079"
+    "email": "admin@example.com",
+    "password": "Password123!"
 }
 
 ###
@@ -19,8 +19,8 @@ POST http://localhost:9091/admin/register
 Content-Type: application/json
 
 {
-    "email": "wachi3079@gmail.com",
-    "password": "Wach1@3079",
+    "email": "admin@example.com",
+    "password": "Password123!",
     "firstname": "Wachi",
     "lastname": "Admin"
 }
@@ -28,18 +28,28 @@ Content-Type: application/json
 ###
 
 ### Admin - Forgot Password (ลืมรหัสผ่านแอดมิน)
-### หมายเหตุ: Endpoint นี้ตอบ 204 No Content เสมอเพื่อความปลอดภัย
 POST http://localhost:9091/admin/forgot-password
 Content-Type: application/json
 
 {
-    "email": "wachi3079@gmail.com"
+    "email": "admin@example.com"
+}
+
+###
+
+### Admin - Reset Password (ตั้งรหัสผ่านใหม่แอดมิน)
+POST http://localhost:9091/admin/reset-password
+Content-Type: application/json
+
+{
+    "code": "RESET_TOKEN_FROM_EMAIL",
+    "password": "NewPassword123!",
+    "passwordConfirmation": "NewPassword123!"
 }
 
 ###
 
 ### Admin - Profile (ดูข้อมูลส่วนตัวแอดมิน)
-### ดึง JWT Token จากผลลัพธ์ของ Admin Login ด้านบนโดยอัตโนมัติ
 GET http://localhost:9091/admin/users/me
 Authorization: Bearer {{adminLogin.response.body.data.token}}
 
@@ -54,8 +64,8 @@ POST http://localhost:9091/api/auth/local
 Content-Type: application/json
 
 {
-    "identifier": "wachi3079@gmail.com",
-    "password": "Wach1@3079"
+    "identifier": "user@example.com",
+    "password": "Password123!"
 }
 
 ###
@@ -65,9 +75,9 @@ POST http://localhost:9091/api/auth/local/register
 Content-Type: application/json
 
 {
-    "username": "wachi_user_01",
-    "email": "wachi_user_01@gmail.com",
-    "password": "Wach1@3079"
+    "username": "wachi01",
+    "email": "user@example.com",
+    "password": "Password123!"
 }
 
 ###
@@ -77,12 +87,23 @@ POST http://localhost:9091/api/auth/forgot-password
 Content-Type: application/json
 
 {
-    "email": "wachi3079@gmail.com"
+    "email": "user@example.com"
+}
+
+###
+
+### User - Reset Password (ตั้งรหัสผ่านใหม่สมาชิก)
+POST http://localhost:9091/api/auth/reset-password
+Content-Type: application/json
+
+{
+    "code": "RESET_TOKEN_FROM_EMAIL",
+    "password": "NewPassword123!",
+    "passwordConfirmation": "NewPassword123!"
 }
 
 ###
 
 ### User - Profile (ดูข้อมูลส่วนตัวสมาชิก)
-### ดึง JWT Token จากผลลัพธ์ของ User Login ด้านบนโดยอัตโนมัติ
 GET http://localhost:9091/api/users/me
 Authorization: Bearer {{userLogin.response.body.jwt}}
