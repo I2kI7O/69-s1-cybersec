@@ -1,4 +1,5 @@
 .env
+http-client.env.json
 data/
 admin_data/
 app_data/

@@ -1,55 +1,58 @@
 ### =========================================================================
-### 1. ADMIN OPERATIONS (ระบบผู้ดูแลระบบ Strapi Admin)
+### 1. ADMIN OPERATIONS (Strapi Admin)
+### หมายเหตุ: ค่าจริง (email/รหัสผ่าน/token) อ่านจาก http-client.env.json
+### ซึ่งอยู่ในเครื่องของคุณเท่านั้น ไม่ถูก commit ขึ้น GitHub
 ### =========================================================================
 
-### Admin - Login (เข้าสู่ระบบแอดมิน)
+### 1.1 Admin - Login (เข้าสู่ระบบแอดมิน)
 # @name adminLogin
 POST http://localhost:9091/admin/login
 Content-Type: application/json
 
 {
-    "email": "admin@example.com",
-    "password": "Password123!"
+    "email": "{{ADMIN_EMAIL}}",
+    "password": "{{ADMIN_PASSWORD}}"
 }
 
 ###
 
-### Admin - Register (ลงทะเบียนแอดมิน)
-POST http://localhost:9091/admin/register
+### 1.2 Admin - Register (ลงทะเบียนแอดมินคนแรก)
+POST http://localhost:9091/admin/register-admin
 Content-Type: application/json
 
 {
-    "email": "admin@example.com",
-    "password": "Password123!",
-    "firstname": "Wachi",
-    "lastname": "Admin"
+    "email": "{{ADMIN_EMAIL}}",
+    "password": "{{ADMIN_PASSWORD}}",
+    "firstname": "Wachirawit",
+    "lastname": "Kantho"
 }
 
 ###
 
-### Admin - Forgot Password (ลืมรหัสผ่านแอดมิน)
+### 1.3 Admin - Forgot Password (ลืมรหัสผ่านแอดมิน)
+### หมายเหตุ: Endpoint นี้ตอบ 204 No Content เสมอเพื่อความปลอดภัย
 POST http://localhost:9091/admin/forgot-password
 Content-Type: application/json
 
 {
-    "email": "admin@example.com"
+    "email": "{{ADMIN_EMAIL}}"
 }
 
 ###
 
-### Admin - Reset Password (ตั้งรหัสผ่านใหม่แอดมิน)
+### 1.4 Admin - Reset Password (ตั้งรหัสผ่านใหม่แอดมิน)
+### นำ token จากอีเมลมาใส่ในตัวแปร RESET_TOKEN ใน http-client.env.json
 POST http://localhost:9091/admin/reset-password
 Content-Type: application/json
 
 {
-    "code": "RESET_TOKEN_FROM_EMAIL",
-    "password": "NewPassword123!",
-    "passwordConfirmation": "NewPassword123!"
+    "resetPasswordToken": "{{RESET_TOKEN}}",
+    "password": "{{NEW_PASSWORD}}"
 }
 
 ###
 
-### Admin - Profile (ดูข้อมูลส่วนตัวแอดมิน)
+### 1.5 Admin - Profile (ดูข้อมูลส่วนตัวแอดมิน)
 GET http://localhost:9091/admin/users/me
 Authorization: Bearer {{adminLogin.response.body.data.token}}
 
@@ -58,52 +61,54 @@ Authorization: Bearer {{adminLogin.response.body.data.token}}
 ### 2. USER OPERATIONS (ระบบสมาชิกทั่วไป Users-Permissions Plugin)
 ### =========================================================================
 
-### User - Login (เข้าสู่ระบบสมาชิก)
+### 2.1 User - Login (เข้าสู่ระบบสมาชิก)
 # @name userLogin
 POST http://localhost:9091/api/auth/local
 Content-Type: application/json
 
 {
-    "identifier": "user@example.com",
-    "password": "Password123!"
+    "identifier": "{{USER_EMAIL}}",
+    "password": "{{USER_PASSWORD}}"
 }
 
 ###
 
-### User - Register (สมัครสมาชิกทั่วไป)
+### 2.2 User - Register (สมัครสมาชิกทั่วไป)
 POST http://localhost:9091/api/auth/local/register
 Content-Type: application/json
 
 {
-    "username": "wachi01",
-    "email": "user@example.com",
-    "password": "Password123!"
+    "username": "{{USERNAME}}",
+    "email": "{{USER_EMAIL}}",
+    "password": "{{USER_PASSWORD}}"
 }
 
 ###
 
-### User - Forgot Password (ลืมรหัสผ่านสมาชิก)
+### 2.3 User - Forgot Password (ลืมรหัสผ่านสมาชิก)
 POST http://localhost:9091/api/auth/forgot-password
 Content-Type: application/json
 
 {
-    "email": "user@example.com"
+    "email": "{{USER_EMAIL}}"
 }
 
 ###
 
-### User - Reset Password (ตั้งรหัสผ่านใหม่สมาชิก)
+### 2.4 User - Reset Password (ตั้งรหัสผ่านใหม่สมาชิก)
+### นำ token จากอีเมลมาใส่ในตัวแปร RESET_TOKEN ใน http-client.env.json
 POST http://localhost:9091/api/auth/reset-password
 Content-Type: application/json
 
 {
-    "code": "RESET_TOKEN_FROM_EMAIL",
-    "password": "NewPassword123!",
-    "passwordConfirmation": "NewPassword123!"
+    "code": "{{RESET_TOKEN}}",
+    "password": "{{NEW_PASSWORD}}",
+    "passwordConfirmation": "{{NEW_PASSWORD}}"
 }
 
 ###
 
-### User - Profile (ดูข้อมูลส่วนตัวสมาชิก)
+### 2.5 User - Profile (ดูข้อมูลส่วนตัวสมาชิก)
+### ดึง JWT Token จากผลลัพธ์ของ User Login ด้านบนโดยอัตโนมัติ
 GET http://localhost:9091/api/users/me
 Authorization: Bearer {{userLogin.response.body.jwt}}
